@@ -1,16 +1,14 @@
-#Prueba 3#Ejercicio 3
-#El siguiente código pretende realizar una media entre 3 números, pero no funciona correctamente. ¿Eres capaz de identificar el problema y solucionarlo?
-#numero_1 = 9
-#numero_2 = 3
-#numero_3 = 6
+#Ejercicio 3
+#Realiza un programa que cumpla el siguiente algoritmo utilizando siempre que sea posible operadores en asignación:
 
-#media = numero_1 + numero_2 + numero_3 / 3
-#print("La nota media es", media)
+#Guarda en una variable numero_magico el valor 12345679 (sin el 8)
+#Lee por pantalla otro numero_usuario, especifica que sea entre 1 y 9
+#Multiplica el numero_usuario por 9 en sí mismo
+#Multiplica el numero_magico por el numero_usuario en sí mismo
+#Finalmente muestra el valor final del numero_magico por pantalla
 
-#Respuesta
-numero_1 = 9
-numero_2 = 3
-numero_3 = 6
-
-media = (numero_1 + numero_2 + numero_3 )/ 3 #Falta paréntesis
-print("La nota media es" .media)
+var = 12345679
+num = int (input("Ingrese el primer número entre 1 y 9: "))
+num = num * 9
+num = num * var
+print (f"El número mágico es: {num}")
