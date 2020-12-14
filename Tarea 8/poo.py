@@ -171,16 +171,16 @@ if __name__ == "__main__":
     #Eliminar Productos
     productos.eliminar_productos(producto_3)
     productos.ver_productos()
-    #Modificar Productos
+    #Modificar Productos, Pendiente validar datos ingresados en la solicitud de modificaciones
     productos.modificar_productos(producto_5)
     productos.ver_productos()
     #Crear Cliente
     cliente_1 = Cliente ('1','Tatiana Tapia','Quito','0998925260')
     cliente_2 = Cliente ('2','Tatiana Tapia 1','Quito','0998925260')
-    #Ver Producto Cliente
+    #Ver Producto Cliente, ejemplo realizado con cliente_1
     print ("El cliente {} con id {} mira los productos existentes:".format(cliente_1.nombre_cliente, cliente_1.id_cliente))
     cliente_1.ver_productos()
-    #Añadir Productos a la cesta
+    #Añadir Productos a la cesta. Escoger como ejemplo el id 1
     cliente_1.anadir_cesta()
-    #Borrar Cesta
+    #Borrar Cesta. Escoger ejemplo el id 1
     cliente_1.borrar_cesta()
