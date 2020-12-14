@@ -1,3 +1,11 @@
+"""Darwin favor analizar el programa y realizar tu comentario para ver que debo mejorar o que esta errado, 
+y si se cumplio con el objetivo del trabajo.
+Adicional favor probar el programa en los casos que pide id de producto, ingresar 1, ya que me falta validar 
+los id de los productos existentes, entonces se realizó la prueba con el id 1
+Agradezco tu ayuda y comentarios.
+Saludos
+"""
+
 class Productos:
     
     def __init__(self, i_d, nombre_producto, grupo, subgrupo):
@@ -26,13 +34,12 @@ class Admin (Productos):
         pass
     def agregar_productos (self, producto):
         self.productos.append (producto)
-        print ("Se agregó el producto: ",producto)
+        print ("Se agregó ",producto)
 
     def eliminar_productos (self,producto):
         if producto in self.productos:
             self.productos.remove(producto)
-            #print ("Se eliminó el producto ",self.producto)
-            print ("Se eliminó el producto ")
+            print ("Se eliminó el ",producto)
         else:
             print ("El Producto no existe")
 
@@ -71,10 +78,10 @@ class Admin (Productos):
             print ("El producto no existe")
 
     def realizar_envio (self):
-        pass
+        print ("Se realizó envío a {} con direccion {} y teléfono {}".format(cliente_1.nombre_cliente, cliente_1.direccion, cliente_1.phno))
 
     def confirmar_entrega (self):
-        pass
+        print ("El cliente {} con id {}, confirma la entrega del producto {} y {}".format(cliente_1.nombre_cliente,cliente_1.id_cliente,producto_1,producto_2))
 
 class Carro ():
 
@@ -101,12 +108,19 @@ class Cliente (Admin, Carro):
         return 'cliente con id {} nombre {} direccion {} phno {}'.format(self.id_cliente, self.nombre_cliente, self.direccion, self.phno)
 
     def comprar_productos (self):
-        print ("Los productos han sido comprados con la tarjeta *** con un precio total de: ***")
+        compra = input ("Desea compar los productos (Ingresar s o S): ")
+        if compra == 's' or compra == 'S':
+            print ("El cliente con id {} va a pagar por {} productos el precio sin iva {} y valor total con iva {}".format(carro_cliente_1.id_cliente,carro_cliente_1.numero_producto,carro_cliente_1.precio,carro_cliente_1.total))
+            print ("Los productos comprados son: {} y {}".format(producto_1,producto_2))
+            print ("Continuar el pago")
+        else:
+            print ("Se volvera a mostrar su cesta")
 
     # def ver_productos (self): Este metodo se hereda de la clase admin
     
     def realizar_pago (self):
-        pass
+        print ("El pago se realizó con éxito:")
+        print ("El cliente {} con id {}  pagó con tarjeta {} numero {} el valor de {}". format(pago_cliente_1.identificador_cliente,pago_cliente_1.nombre_cliente,pago_cliente_1.tipo_tarjeta,pago_cliente_1.no_tarjeta,carro_cliente_1.total))
 
     def anadir_cesta (self):
         #Falta añadir líneas de codigo para realizar comparación de id de acuerdo a productos existentes
@@ -139,16 +153,15 @@ class Pago (Cliente):
     def __str__(self):
         return 'El cliente {}  con nombre {} tipo de tarjeta {} no_tarjeta {}'.format(self.identificador_cliente, self.nombre_cliente, self.tipo_tarjeta, self.no_tarjeta)
 
-class Invitado (Productos):
+class Invitado (Admin):
     
-    def __init__(self, nombre_invitador, direccion_invitador_,phno):
+    def __init__(self):
         print ("Es un invitado")
     
-    def ver_productos (self):
-        pass
+    #def ver_productos (self):  Metodo heredado de clase Admin
 
     def registrarse (self):
-        pass
+        print ("Hola, usted se registró como invitado")
 
 if __name__ == "__main__":
 
@@ -159,21 +172,21 @@ if __name__ == "__main__":
     producto_4 = Productos(4,'Colonia Blaze','Fragancia','Niños')
     producto_5 = Productos(5,'Colonia Frozen','Fragancias','Niños')
     #Llamar a la Clase Admin
-    productos = Admin (1,'David')
+    administrador_1 = Admin (1,'David')
     #Agregar Productos
-    productos.agregar_productos(producto_1)
-    productos.agregar_productos(producto_2)
-    productos.agregar_productos(producto_3)
-    productos.agregar_productos(producto_4)
-    productos.agregar_productos(producto_5)
+    administrador_1.agregar_productos(producto_1)
+    administrador_1.agregar_productos(producto_2)
+    administrador_1.agregar_productos(producto_3)
+    administrador_1.agregar_productos(producto_4)
+    administrador_1.agregar_productos(producto_5)
     #MostrarProductos
-    productos.ver_productos()
+    administrador_1.ver_productos()
     #Eliminar Productos
-    productos.eliminar_productos(producto_3)
-    productos.ver_productos()
+    administrador_1.eliminar_productos(producto_3)
+    administrador_1.ver_productos()
     #Modificar Productos, Pendiente validar datos ingresados en la solicitud de modificaciones
-    productos.modificar_productos(producto_5)
-    productos.ver_productos()
+    administrador_1.modificar_productos(producto_5)
+    administrador_1.ver_productos()
     #Crear Cliente
     cliente_1 = Cliente ('1','Tatiana Tapia','Quito','0998925260')
     cliente_2 = Cliente ('2','Tatiana Tapia 1','Quito','0998925260')
@@ -184,3 +197,20 @@ if __name__ == "__main__":
     cliente_1.anadir_cesta()
     #Borrar Cesta. Escoger ejemplo el id 1
     cliente_1.borrar_cesta()
+    #Añadir Productos a la cesta. Escoger como ejemplo el id 1
+    cliente_1.anadir_cesta()
+    #compra productos
+    carro_cliente_1 = Carro ('1',2,producto_1, producto_2,350,350+(350*12/100))
+    cliente_1.comprar_productos()
+    #Realizar pago
+    pago_cliente_1 = Pago ('1','Tatiana Tapia', 'Débito', '123456789')
+    pago_cliente_1.realizar_pago()
+    #Realizar envio de productos
+    cliente_1.realizar_envio()
+    #Confirmar entrega de productos
+    cliente_1.confirmar_entrega()
+    #Registro de invitador
+    invitado = Invitado ()
+    invitado.registrarse()
+    #Ver productos como invitado
+    invitado.ver_productos()
