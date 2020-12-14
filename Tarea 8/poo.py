@@ -1,14 +1,13 @@
 class Productos:
     
-    def __init__(self, i_d, nombre_producto, grupo, subgrupo, precio):
+    def __init__(self, i_d, nombre_producto, grupo, subgrupo):
         self.i_d = i_d
         self.nombre_producto = nombre_producto
         self.grupo = grupo
         self.subgrupo = subgrupo
-        self.precio = precio
 
     def __str__(self):
-        return 'Producto: id {} nombre {} grupo {} subgrupo {} precio {}'.format(self.i_d, self.nombre_producto, self.grupo, self.subgrupo, self.precio)
+        return 'Producto: id {} nombre {} grupo {} subgrupo {}'.format(self.i_d, self.nombre_producto, self.grupo, self.subgrupo)
 
 class Admin (Productos):
     
@@ -46,7 +45,6 @@ class Admin (Productos):
                 2.- NOMBRE_PRODUCTO
                 3.- GRUPO
                 4.- SUBGRUPO
-                5.- PRECIO
                 S.- Salir 
                 """)
                 opcion = input("Seleccione el valor a modificar: \n")
@@ -63,9 +61,6 @@ class Admin (Productos):
                 elif opcion == '4':
                     nuevo_subgrupo = input("Ingrese el nuevo sugrupo del producto: ")
                     producto.subgrupo = nuevo_subgrupo
-                elif opcion == '5':
-                    nuevo_precio = input("Ingrese el nuevo precio del producto: ")
-                    producto.precio = nuevo_precio
                 elif opcion == 'S' or opcion == 's':
                     caracter = input("Desea salir de modificar: y/n \n")
                     if caracter == 'y' or caracter == 'Y':
@@ -81,38 +76,7 @@ class Admin (Productos):
     def confirmar_entrega (self):
         pass
 
-class Cliente (Admin):
-    clientes = []
-    cesta = []
-    def __init__(self, id_cliente, nombre_cliente, direccion, phno,cesta = []):
-        self.id_cliente = id_cliente
-        self.nombre_cliente = nombre_cliente
-        self.direccion = direccion
-        self.phno = phno
-        self.cesta = cesta
-
-    def __str__(self):
-        return 'cliente con id {} nombre {} direccion {} phno {}'.format(self.id_cliente, self.nombre_cliente, self.direccion, self.phno)
-
-    def comprar_productos (self):
-        print ("Escoger productos:")
-        pass
-
-    # def ver_productos (self): Este metodo se accede desde la clase Admin
-    def realizar_pago (self):
-        pass
-
-    def anadir_cesta (self):
-        print ("Escoger productos por id de la lista de productos existentes:")
-        #cantidad = int (input ("Ingrese la cantidad de producto: "))
-        #for cantidad in self.productos:
-        #cesta.append(id_productos)
-
-
-    def borrar_cesta (self):
-        pass
-
-class Carro:
+class Carro ():
 
     def __init__(self, id_cliente, numero_producto, producto_1, producto_2, precio, total):
         self.id_cliente = id_cliente
@@ -124,6 +88,45 @@ class Carro:
 
     def __str__(self):
         return 'cliente con id {} número de producto {} producto 1 {} producto 2 {}, precio {}, total {}'.format(self.id_cliente, self.numero_producto, self.producto_1, self.producto_2, self.precio, self.total)
+class Cliente (Admin, Carro):
+    clientes = []
+    cesta = []
+    def __init__(self, id_cliente, nombre_cliente, direccion, phno):
+        self.id_cliente = id_cliente
+        self.nombre_cliente = nombre_cliente
+        self.direccion = direccion
+        self.phno = phno
+
+    def __str__(self):
+        return 'cliente con id {} nombre {} direccion {} phno {}'.format(self.id_cliente, self.nombre_cliente, self.direccion, self.phno)
+
+    def comprar_productos (self):
+        print ("Los productos han sido comprados con la tarjeta *** con un precio total de: ***")
+
+    # def ver_productos (self): Este metodo se hereda de la clase admin
+    
+    def realizar_pago (self):
+        pass
+
+    def anadir_cesta (self):
+        #Falta añadir líneas de codigo para realizar comparación de id de acuerdo a productos existentes
+        #como ejemplo se realiza del producto 1
+        print ("Escoger productos por id de la lista de productos existentes para añadir a la cesta:")
+        id_productos = int (input ("Ingrese id del producto: "))
+        self.cesta.append(id_productos)
+        print (self.cesta)
+        self.productos[0]
+        print ("El cliente {} con id {} añadió a la cesta el {}".format(cliente_1.nombre_cliente, cliente_1.id_cliente,self.productos[0]))
+
+    def borrar_cesta (self):
+        #pendiente validar y los productos de la cesta para eliminar los que desea
+        print ("Escoger el id de la de productos de la cesta a eliminar:")
+        id_productos = int (input ("Ingrese id del producto: "))
+        #print (self.cesta)
+        self.cesta.remove(self.cesta[0])
+        print ("El cliente {} con id {} borro de la cesta el {}".format(cliente_1.nombre_cliente, cliente_1.id_cliente,self.productos[0]))
+        #print (self.cesta)
+        print ("Cesta Eliminada")
 
 class Pago (Cliente):
     
@@ -136,9 +139,9 @@ class Pago (Cliente):
     def __str__(self):
         return 'El cliente {}  con nombre {} tipo de tarjeta {} no_tarjeta {}'.format(self.identificador_cliente, self.nombre_cliente, self.tipo_tarjeta, self.no_tarjeta)
 
-class Invitado:
+class Invitado (Productos):
     
-    def __init__(self):
+    def __init__(self, nombre_invitador, direccion_invitador_,phno):
         print ("Es un invitado")
     
     def ver_productos (self):
@@ -150,11 +153,11 @@ class Invitado:
 if __name__ == "__main__":
 
     #Creación de productos
-    producto_1 = Productos(1,'Colonia Spiderman','Fragancia','Niños',100)
-    producto_2 = Productos(2,'Colonia Rayo Mcqueen','Fragancia','Niños',200)
-    producto_3 = Productos(3,'Colonia Advengers','Fragancia','Niños',300)
-    producto_4 = Productos(4,'Colonia Blaze','Fragancia','Niños',400)
-    producto_5 = Productos(5,'Colonia Frozen','Fragancias','Niños',500)
+    producto_1 = Productos(1,'Colonia Spiderman','Fragancia','Niños')
+    producto_2 = Productos(2,'Colonia Rayo Mcqueen','Fragancia','Niños')
+    producto_3 = Productos(3,'Colonia Advengers','Fragancia','Niños')
+    producto_4 = Productos(4,'Colonia Blaze','Fragancia','Niños')
+    producto_5 = Productos(5,'Colonia Frozen','Fragancias','Niños')
     #Llamar a la Clase Admin
     productos = Admin (1,'David')
     #Agregar Productos
@@ -177,4 +180,7 @@ if __name__ == "__main__":
     #Ver Producto Cliente
     print ("El cliente {} con id {} mira los productos existentes:".format(cliente_1.nombre_cliente, cliente_1.id_cliente))
     cliente_1.ver_productos()
+    #Añadir Productos a la cesta
     cliente_1.anadir_cesta()
+    #Borrar Cesta
+    cliente_1.borrar_cesta()
